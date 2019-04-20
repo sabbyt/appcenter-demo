@@ -1,0 +1,6 @@
+**/db
+**/node_modules
+**/build
+**/Pods
+.env
+.DS_Store
