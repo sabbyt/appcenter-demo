@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "appium": "appium",
+    "appium:doctor": "appium-doctor"
   },
   "dependencies": {
     "appcenter": "1.13.0",
@@ -13,11 +15,14 @@
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-elements": "^1.1.0",
-    "react-native-vector-icons": "^6.4.2"
+    "react-native-vector-icons": "^6.4.2",
+    "wd": "^1.11.2"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/runtime": "7.4.3",
+    "appium": "^1.12.1",
+    "appium-doctor": "^1.9.0",
     "babel-jest": "24.7.1",
     "jest": "24.7.1",
     "metro-react-native-babel-preset": "0.53.1",

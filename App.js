@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { ThemeProvider, Card, Input, CheckBox, Button } from 'react-native-elements'
 
 export default class App extends Component {
@@ -45,40 +45,42 @@ export default class App extends Component {
     return (
       <ThemeProvider>
         <ScrollView>
-          <Card
-            title='Welcome to GAB 2019!'
-            image={require('./resources/gab_logo.png')}
-            imageProps={{resizeMode: 'contain'}} />
-          <Card>
-            <Input
-              label={'Add a to-do item'}
-              value={this.state.textInput}
-              placeholder={'+'}
-              onChangeText={(textInput) => this.setState({textInput})}
-              onSubmitEditing={() => this.addItem()}
-              returnKeyType={'done'}
-            />
-            <Button
-              title='Add'
-              type='outline'
-              raised
-              containerStyle={{marginTop: 20}}
-              onPress={() => this.addItem()}
-            />
-          </Card>
-          {
-            this.state.list.length !== 0
-              ? <Card>
-                {
-                  this.state.list.map((item, index) => <CheckBox
-                    key={index}
-                    title={item.title}
-                    checked={item.completed}
-                    onPress={() => this.updateItem(index, item.completed)} />)
-                }
-              </Card>
-              : null
-          }
+          <View accessibilityLabel='testview'>
+            <Card
+              title='Welcome to GAB 2019!'
+              image={require('./resources/gab_logo.png')}
+              imageProps={{resizeMode: 'contain'}} />
+            <Card>
+              <Input
+                label={'Add a to-do item'}
+                value={this.state.textInput}
+                placeholder={'+'}
+                onChangeText={(textInput) => this.setState({textInput})}
+                onSubmitEditing={() => this.addItem()}
+                returnKeyType={'done'}
+              />
+              <Button
+                title='Add'
+                type='outline'
+                raised
+                containerStyle={{marginTop: 20}}
+                onPress={() => this.addItem()}
+              />
+            </Card>
+            {
+              this.state.list.length !== 0
+                ? <Card>
+                  {
+                    this.state.list.map((item, index) => <CheckBox
+                      key={index}
+                      title={item.title}
+                      checked={item.completed}
+                      onPress={() => this.updateItem(index, item.completed)} />)
+                  }
+                </Card>
+                : null
+            }
+          </View>
         </ScrollView>
       </ThemeProvider>
     )
