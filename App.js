@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { ThemeProvider, Card, Input, CheckBox, Button } from 'react-native-elements'
+import codePush from 'react-native-code-push'
 
-export default class App extends Component {
+let codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.ON_NEXT_RESUME
+}
+
+class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -86,3 +92,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default codePush(codePushOptions)(App)

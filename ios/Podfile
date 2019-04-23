@@ -13,6 +13,8 @@ target 'gabDemo' do
   
 
   platform :ios, '9.0'
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
   target 'gabDemoTests' do
     inherit! :search_paths
     # Pods for testing
