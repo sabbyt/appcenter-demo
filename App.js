@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { ThemeProvider, Card, Input, CheckBox, Button } from 'react-native-elements'
 import codePush from 'react-native-code-push'
+import Crashes from 'appcenter-crashes'
 
 let codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
@@ -18,6 +19,7 @@ class App extends Component {
   }
 
   addItem () {
+
     if (this.state.textInput.trim().length !== 0) {
       // Creating new task item
       let newTask = {title: this.state.textInput, completed: false}
@@ -64,6 +66,15 @@ class App extends Component {
                 onChangeText={(textInput) => this.setState({textInput})}
                 onSubmitEditing={() => this.addItem()}
                 returnKeyType={'done'}
+              />
+              <Button
+                title='Crash Button'
+                type='outline'
+                raised
+                containerStyle={{marginTop: 20}}
+                onPress={() => {
+                  Crashes.generateTestCrash()
+                }}
               />
               <Button
                 title='Add'
