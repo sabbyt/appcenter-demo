@@ -115,6 +115,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.release
     }
     splits {
         abi {
@@ -142,6 +143,8 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
         }
+    }
+    productFlavors {
     }
 }
 

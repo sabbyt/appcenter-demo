@@ -73,7 +73,9 @@ class App extends Component {
                 raised
                 containerStyle={{marginTop: 20}}
                 onPress={() => {
-                  Crashes.generateTestCrash()
+                  // Crashes.generateTestCrash()
+
+                  throw new Error('This is a test javascript crash!');
                 }}
               />
               <Button
