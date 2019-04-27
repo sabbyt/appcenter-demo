@@ -4,8 +4,9 @@ import { ThemeProvider, Card, Input, CheckBox, Button } from 'react-native-eleme
 import codePush from 'react-native-code-push'
 
 let codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  installMode: codePush.InstallMode.ON_NEXT_RESUME
+  updateDialog: true,
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  installMode: codePush.InstallMode.IMMEDIATE
 }
 
 class App extends Component {
@@ -15,6 +16,30 @@ class App extends Component {
       list: [],
       textInput: ''
     }
+  }
+
+  codePushStatusDidChange (status) {
+    switch (status) {
+      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        console.log('Checking for updates.')
+        break
+      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+        console.log('Downloading package.')
+        break
+      case codePush.SyncStatus.INSTALLING_UPDATE:
+        console.log('Installing update.')
+        break
+      case codePush.SyncStatus.UP_TO_DATE:
+        console.log('Up-to-date.')
+        break
+      case codePush.SyncStatus.UPDATE_INSTALLED:
+        console.log('Update installed.')
+        break
+    }
+  }
+
+  codePushDownloadDidProgress (progress) {
+    console.log(progress.receivedBytes + ' of ' + progress.totalBytes + ' received.')
   }
 
   addItem () {
@@ -55,6 +80,7 @@ class App extends Component {
             <Card
               title='Welcome to GAB 2019!'
               image={require('./resources/gab_logo.png')}
+              // image={require('./resources/ms_logo.jpg')}
               imageProps={{resizeMode: 'contain'}} />
             <Card>
               <Input
