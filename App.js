@@ -3,6 +3,9 @@ import { ScrollView, View } from 'react-native'
 import { ThemeProvider, Card, Input, CheckBox, Button } from 'react-native-elements'
 import codePush from 'react-native-code-push'
 
+// import Crashes from 'appcenter-crashes'
+// import Analytics from 'appcenter-analytics'
+
 let codePushOptions = {
   updateDialog: true,
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
@@ -17,6 +20,14 @@ class App extends Component {
       textInput: ''
     }
   }
+
+  // async componentDidMount () {
+  //   const didCrash = await Crashes.hasCrashedInLastSession()
+
+  //   if (didCrash) {
+  //     alert('Achievement unlocked: App crashed during a presentation')
+  //   }
+  // }
 
   codePushStatusDidChange (status) {
     switch (status) {
@@ -44,6 +55,8 @@ class App extends Component {
 
   addItem () {
     if (this.state.textInput.trim().length !== 0) {
+      // Analytics.trackEvent('Add new item', { Task: this.state.textInput })
+
       // Creating new task item
       let newTask = {title: this.state.textInput, completed: false}
       // Updating task list
@@ -79,8 +92,8 @@ class App extends Component {
           <View accessibilityLabel='testview'>
             <Card
               title='Welcome to GAB 2019!'
-              image={require('./resources/gab_logo.png')}
-              // image={require('./resources/ms_logo.jpg')}
+              // image={require('./resources/gab_logo.png')}
+              image={require('./resources/ms_logo.jpg')}
               imageProps={{resizeMode: 'contain'}} />
             <Card>
               <Input
@@ -90,6 +103,15 @@ class App extends Component {
                 onChangeText={(textInput) => this.setState({textInput})}
                 onSubmitEditing={() => this.addItem()}
                 returnKeyType={'done'}
+              />
+              <Button
+                title='Crash Button'
+                type='outline'
+                raised
+                containerStyle={{marginTop: 20}}
+                onPress={() => {
+                  throw new Error('This is a test javascript crash!')
+                }}
               />
               <Button
                 title='Add'
